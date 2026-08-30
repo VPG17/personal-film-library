@@ -1,11 +1,16 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
-from app.routers import search as search_module
 
-app = FastAPI()
+from app import models  # noqa: F401
+from app.database import Base, engine
+from app.routers import search
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
 
-app.include_router(search_module.router)
+
+app = FastAPI(title="Filmoteca personal", lifespan=lifespan)
+app.include_router(search.router)
