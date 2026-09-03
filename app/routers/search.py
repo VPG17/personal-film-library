@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from app.services.tmdb import tmdb_buscador
-from app.schemas.tmdb_schema import MovieOut
+from app.schemas.tmdb import MovieOut
 
 class TMDBError(Exception):
     """Algo falló hablando con TMDB."""
